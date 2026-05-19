@@ -534,3 +534,44 @@ li.drag-over {
 .save-btn:hover {
   background: var(--accent-hover);
 }
+
+#upgrade-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 9999;
+
+  background: #111827;
+  color: white;
+
+  padding: 16px;
+  border-radius: 14px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.upgrade-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.upgrade-content p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.upgrade-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.upgrade-actions button {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}

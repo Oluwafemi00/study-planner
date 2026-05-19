@@ -1,3 +1,59 @@
+async function checkForUpgrade() {
+  try {
+    const response = await fetch("https://studyplanr.netlify.app/update.json", {
+      cache: "no-store",
+    });
+
+    const data = await response.json();
+
+    if (data.showUpgrade) {
+      showUpgradeBanner(data);
+    }
+  } catch (error) {
+    console.log("Upgrade check failed");
+  }
+}
+
+checkForUpgrade();
+
+function showUpgradeBanner(data) {
+  // prevent duplicate banners
+  if (document.getElementById("upgrade-banner")) return;
+
+  const banner = document.createElement("div");
+
+  banner.id = "upgrade-banner";
+
+  banner.innerHTML = `
+    <div class="upgrade-content">
+      <div>
+        <strong>✨ New Study Planner Available</strong>
+        <p>${data.message}</p>
+      </div>
+
+      <div class="upgrade-actions">
+        <button id="upgrade-now">
+          Try Now
+        </button>
+
+        <button id="upgrade-later">
+          Later
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(banner);
+
+  document.getElementById("upgrade-now").addEventListener("click", () => {
+    window.open(data.url, "_blank");
+  });
+
+  document.getElementById("upgrade-later").addEventListener("click", () => {
+    banner.remove();
+  });
+}
+
 // --- 1. INITIAL STATE & SELECTORS ---
 
 const form = document.getElementById("study-form");
